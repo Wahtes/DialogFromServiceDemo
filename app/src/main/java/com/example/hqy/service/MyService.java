@@ -65,7 +65,6 @@ public class MyService extends Service {
                 timeHandler.postDelayed(this, 12000);//两次之间的间隔
             }
         };
-
     }
 
     @Override

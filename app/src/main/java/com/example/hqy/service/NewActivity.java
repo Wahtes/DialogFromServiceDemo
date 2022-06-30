@@ -34,7 +34,6 @@ import android.support.v4.content.ContextCompat;
 public class NewActivity extends Activity{
 
     private static final String TAG = "NEW_ACTIVITY";
-    Button buttonStart, buttonStop;
     Activity mActivity;
     Handler timeHandler = new Handler();
     Runnable runnable;
@@ -88,20 +87,6 @@ public class NewActivity extends Activity{
         super.onDestroy();
     }
 
-
-//    public void onClick(View src) {
-//        switch (src.getId()) {
-//            case R.id.buttonStart:
-//                Log.i(TAG, "onClick: starting service");
-//                startService(new Intent(this, MyService.class));
-//                break;
-//            case R.id.buttonStop:
-//                Log.i(TAG, "onClick: stopping service");
-//                stopService(new Intent(this, MyService.class));
-//                break;
-//        }
-//    }
-
     // 设置多少秒一次
     @SuppressLint("MissingPermission")
     void initLocation() {
@@ -140,21 +125,6 @@ public class NewActivity extends Activity{
             lon = location.getLongitude();
             speed = location.getSpeed();
             GpsStatus gpsStatus = locationManager.getGpsStatus(null);
-            int maxSatellites = gpsStatus.getMaxSatellites();
-            //创建一个迭代器保存所有卫星
-            Iterator<GpsSatellite> satelliteIterator = gpsStatus.getSatellites().iterator();
-            int count = 0;
-            while (satelliteIterator.hasNext() && count <= maxSatellites) {
-                GpsSatellite s = satelliteIterator.next();
-                // 只有信噪比不为0时才算合格的卫星
-                if (s.getSnr() != 0) {
-                    count++;
-                }
-            }
-
-            stars = count;
-
-//            result = "纬度：" + lat + "\n经度：" + lon + "\n速度：" + speed + "\n卫星数量：" + stars;
 
             result = String.format("【%d】%s\n纬度：%f\n经度：%f\n", index++, new Date(), lat, lon); // ""纬度：" + lat + "\n经度：" + lon + "\n";
             Log.i("xml", "显示结果 = " + result);
@@ -197,7 +167,6 @@ public class NewActivity extends Activity{
 
         @Override
         public void onProviderEnabled(String provider) {
-
         }
 
         @Override
