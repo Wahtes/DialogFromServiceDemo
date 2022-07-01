@@ -19,7 +19,6 @@ import java.util.Date;
 
 public class MyService extends Service {
     private static final String TAG = "MyService";
-    MediaPlayer player;
     Handler timeHandler = new Handler();
     Runnable runnable;
     Service mService;
@@ -34,8 +33,6 @@ public class MyService extends Service {
         Toast.makeText(this, "My Service created", Toast.LENGTH_LONG).show();
         Log.i(TAG, "onCreate");
 
-        player = MediaPlayer.create(this, R.raw.he);
-        player.setLooping(false);
         mService = this;
         runnable=new Runnable() {
             @Override
@@ -71,7 +68,6 @@ public class MyService extends Service {
     public void onDestroy() {
         Toast.makeText(this, "My Service Stopped", Toast.LENGTH_LONG).show();
         Log.i(TAG, "onDestroy");
-        player.stop();
         timeHandler.removeCallbacks(runnable);
     }
 
@@ -79,7 +75,6 @@ public class MyService extends Service {
     public void onStart(Intent intent, int startid) {
         Toast.makeText(this, "My Service Start", Toast.LENGTH_LONG).show();
         Log.i(TAG, "onStart");
-        player.start();
         timeHandler.postDelayed(runnable, 1000);//第一次运行的延迟
     }
 
